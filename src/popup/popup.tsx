@@ -4,7 +4,7 @@ import { Box, Grid, InputBase, IconButton, Paper, Icon } from '@material-ui/core
 import { Add as AddIcon } from '@material-ui/icons'
 import 'fontsource-roboto'
 import './popup.css'
-import WeatherCard from './WeatherCard/WeatherCard';
+import WeatherCard from '../components/WeatherCard/WeatherCard';
 import { setStoredCities, setStoredOptions, getStoredCities, getStoredOptions, LocalStorageOptions } from '../utils/storage'
 
 const App: React.FC<{}> = () => {
