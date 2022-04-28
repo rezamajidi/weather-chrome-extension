@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { Box, Grid, InputBase, IconButton, Paper } from '@material-ui/core'
+import { Box, Grid, InputBase, IconButton, Paper, Icon } from '@material-ui/core'
 import { Add as AddIcon } from '@material-ui/icons'
 import 'fontsource-roboto'
 import './popup.css'
@@ -32,6 +32,15 @@ const App: React.FC<{}> = () => {
       setCities(updateCities)
     })
   }
+  const handleTempScaleButtonClick = () => {
+    const updateOptions: LocalStorageOptions = {
+      ...options,
+      tempScale: options.tempScale === 'metric' ? 'imperial' : 'metric'
+    }
+    setStoredOptions(updateOptions).then(() => {
+      setOptions(updateOptions)
+    })
+  }
 
   if(!options) {
     return null
@@ -58,11 +67,21 @@ const App: React.FC<{}> = () => {
             </Box>
           </Paper>
         </Grid>
+        <Grid item>
+          <Paper>
+            <Box py="4px">
+              <IconButton onClick={handleTempScaleButtonClick}>
+                {options.tempScale === 'metric' ? '\u2103' : '\u2109'}
+              </IconButton>
+            </Box>
+          </Paper>
+        </Grid>
       </Grid>
       {
         cities.map((city, index) => (
           <WeatherCard
             city={city}
+            tempScale={options.tempScale}
             key={index}
             onDelete={() => handleCityDeleteButtonClick(index)}
           />
